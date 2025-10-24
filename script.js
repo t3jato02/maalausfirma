@@ -2,16 +2,33 @@
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+}
 
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
+    if (hamburger) hamburger.classList.remove('active');
+    if (navMenu) navMenu.classList.remove('active');
 }));
+
+// Dropdown: open on hover desktop (handled by CSS), toggle on click in mobile
+document.querySelectorAll('.nav-item.dropdown > .nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile) {
+            e.preventDefault();
+            const parent = link.parentElement;
+            const open = parent.classList.contains('open');
+            // close others
+            document.querySelectorAll('.nav-item.dropdown').forEach(d => d.classList.remove('open'));
+            if (!open) parent.classList.add('open');
+        }
+    });
+});
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -53,11 +70,17 @@ filterButtons.forEach(button => {
 
 // CTA Button scroll to gallery
 const ctaButton = document.querySelector('.cta-button');
-ctaButton.addEventListener('click', () => {
-    document.querySelector('#contact').scrollIntoView({
-        behavior: 'smooth'
+if (ctaButton) {
+    ctaButton.addEventListener('click', () => {
+        const contact = document.querySelector('#contact');
+        if (contact) {
+            contact.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            // If no contact section on this page, go to homepage contact
+            window.location.href = 'index.html#contact';
+        }
     });
-});
+}
 
 // All "Pyydä ilmainen tarjous" and similar buttons scroll to contact
 document.querySelectorAll('button, a').forEach(element => {
@@ -110,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Contact form handling
 const contactForm = document.querySelector('.contact-form');
-contactForm.addEventListener('submit', (e) => {
+if (contactForm) contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
     // Get form data

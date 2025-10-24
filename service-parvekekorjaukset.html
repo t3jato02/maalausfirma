@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Parvekekorjaukset – Teuvo Järvenpää Oy." />
+  <title>Parvekekorjaukset — Teuvo Järvenpää Oy</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo"><h2>Teuvo Järvenpää Oy</h2></div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a class="nav-link" href="index.html#home">Etusivu</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#gallery">Galleria</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#about">Meistä</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="services.html">Palvelut</a>
+          <ul class="dropdown-menu">
+            <li><a href="service-julkisivutyot.html">Julkisivutyöt</a></li>
+            <li><a href="service-maalaustyot.html">Maalaustyöt</a></li>
+            <li><a href="service-rappaustyot.html">Rappaustyöt</a></li>
+            <li><a class="active" href="service-parvekekorjaukset.html">Parvekekorjaukset</a></li>
+            <li><a href="service-tasoitetyot.html">Tasoitetyöt</a></li>
+            <li><a href="service-huoneistoremontit.html">Huoneistoremontit</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="index.html#contact">Yhteystiedot</a></li>
+      </ul>
+      <div class="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="services">
+      <div class="container">
+        <h1 class="section-title">Parvekekorjaukset</h1>
+        <p class="section-description">Parvekkeiden pintakorjaukset, hiekkapuhallus ja maalaus taloyhtiöille. Turvalliset ja kestävät ratkaisut.</p>
+        <div class="services-grid">
+          <div class="service-card"><div class="service-icon">🏗️</div><h3>Korjauspalvelut</h3><p>Betonikorjaukset, kaiteiden käsittelyt ja pinnoitukset.</p></div>
+          <div class="service-card"><div class="service-icon">🧼</div><h3>Puhdistus ja esikäsittely</h3><p>Hiekkapuhallus ja kemialliset puhdistukset pintojen valmisteluun.</p></div>
+          <div class="service-card"><div class="service-icon">🎯</div><h3>Viimeistely</h3><p>Maalaus ja pinnoitus, jotka kestävät sääolosuhteet.</p></div>
+        </div>
+        <div style="text-align:center; margin-top: 2rem;"><a class="cta-button" href="index.html#contact">Pyydä ilmainen tarjous</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section"><h3>Teuvo Järvenpää Oy</h3><p>Julkisivutöiden, maalausten ja pinnoitusten asiantuntija Oulussa ja Pohjois-Pohjanmaalla. Perustettu vuonna 1984 – yli 40 vuotta kokemusta laadusta.</p></div>
+        <div class="footer-section"><h4>Palvelut</h4><ul>
+          <li><a href="service-julkisivutyot.html">Julkisivutyöt</a></li>
+          <li><a href="service-maalaustyot.html">Maalaus</a></li>
+          <li><a href="service-rappaustyot.html">Rappaus</a></li>
+          <li><a href="service-parvekekorjaukset.html">Parvekekorjaukset</a></li>
+          <li><a href="service-tasoitetyot.html">Tasoitus</a></li>
+        </ul></div>
+        <div class="footer-section"><h4>Yhteystiedot</h4><p>📞 0400 580 172</p><p>✉️ teuvo.jarvenpaa@luukku.com</p><p>📍 PL 497, 90100 Oulu</p></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2025 Teuvo Järvenpää Oy. Kaikki oikeudet pidätetään.</p></div>
+    </div>
+  </footer>
+
+  <div class="floating-contact-buttons" id="floatingButtons">
+    <div class="contact-toggle-btn" id="toggleBtn" title="Piilota/Näytä"><span class="toggle-arrow">◄</span></div>
+    <div class="contact-buttons-container" id="buttonsContainer">
+      <div class="contact-label">Shares</div>
+      <a href="mailto:topejar@gmail.com" class="contact-btn" title="Lähetä sähköpostia">📧</a>
+      <a href="https://wa.me/358400580172" target="_blank" class="contact-btn" title="WhatsApp">🟢</a>
+      <a href="tel:+358400580172" class="contact-btn" title="Soita meille">📞</a>
+      <a href="https://m.me/teuvojarvenpaa" target="_blank" class="contact-btn" title="Messenger">💬</a>
+      <button class="contact-btn contact-btn-share" title="Jaa sivusto">⬆️</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Teuvo Järvenpää Oy – julkisivutyöt, maalaus, tasoitus, parvekekorjaukset ja rappaus Oulussa ja Pohjois-Pohjanmaalla.">
+    <title>Palvelut — Teuvo Järvenpää Oy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.ico">
+    <meta name="theme-color" content="#2C5F8D">
+    <style>
+      /* page-specific tiny tweaks to give space under fixed navbar */
+      body { padding-top: 70px; }
+    </style>
+    
+    <!-- JSON-LD breadcrumbs for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem","position": 1,"name": "Etusivu","item": "https://example.com/index.html"},
+        {"@type": "ListItem","position": 2,"name": "Palvelut","item": "https://example.com/services.html"}
+      ]
+    }
+    </script>
+    
+</head>
+<body>
+    <!-- Navigation: identical structure to etusivu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Teuvo Järvenpää Oy</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a class="nav-link" href="index.html#home">Etusivu</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#gallery">Galleria</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#about">Meistä</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="services.html">Palvelut</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="service-julkisivutyot.html">Julkisivutyöt</a></li>
+                        <li><a href="service-maalaustyot.html">Maalaustyöt</a></li>
+                        <li><a href="service-rappaustyot.html">Rappaustyöt</a></li>
+                        <li><a href="service-parvekekorjaukset.html">Parvekekorjaukset</a></li>
+                        <li><a href="service-tasoitetyot.html">Tasoitetyöt</a></li>
+                        <li><a href="service-huoneistoremontit.html">Huoneistoremontit</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="index.html#contact">Yhteystiedot</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Palvelumme</h2>
+            <p class="section-description">Tarjoamme monipuolisia taidealaan liittyviä palveluita</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Maalaustyöt</h3>
+                    <p>Sisä- ja ulkomaalaukset sekä kattojen maalaukset. Ruiskumaalaukset ja perinteiset maalausmenetelmät ammattitaidolla.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3>Julkisivutyöt</h3>
+                    <p>Julkisivusaneeraukset ja -korjaukset taloyhtiöille, liike- ja asuinkiinteistöihin. Kattavat julkisivuratkaisut.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🧱</div>
+                    <h3>Rappaustyöt</h3>
+                    <p>Rappaukset ja pinnoitukset sekä tasoitetyöt sisällä ja ulkona. Levy-, betoni- ja harkkopintojen tasoitukset.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Parvekekorjaukset</h3>
+                    <p>Parvekkeiden pintakorjaukset, hiekkapuhallus ja maalaus taloyhtiöille. Ammattitason saneerauspalvelut.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Tasoitetyöt</h3>
+                    <p>Levy-, betoni- ja harkkopintojen tasoitukset – pääosin koneellisesti maalivalmiiksi. Laadukas lopputulos.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Huoneistoremontit</h3>
+                    <p>Kattavat huoneistoremontit: maalaus, rappaus ja viimeistelytyöt. Kokonaisvaltaiset saneerausratkaisut.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as index) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Teuvo Järvenpää Oy</h3>
+                    <p>Julkisivutöiden, maalausten ja pinnoitusten asiantuntija Oulussa ja Pohjois-Pohjanmaalla. Perustettu vuonna 1984 – yli 40 vuotta kokemusta laadusta.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Palvelut</h4>
+                    <ul>
+                        <li><a href="services.html#services">Julkisivutyöt</a></li>
+                        <li><a href="services.html#services">Maalaus</a></li>
+                        <li><a href="services.html#services">Rappaus</a></li>
+                        <li><a href="services.html#services">Parvekekorjaukset</a></li>
+                        <li><a href="services.html#services">Tasoitus</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Yhteystiedot</h4>
+                    <p>📞 0400 580 172</p>
+                    <p>✉️ teuvo.jarvenpaa@luukku.com</p>
+                    <p>📍 PL 497, 90100 Oulu</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Teuvo Järvenpää Oy. Kaikki oikeudet pidätetään.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Contact Buttons (reuse same component for consistency) -->
+    <div class="floating-contact-buttons" id="floatingButtons">
+        <div class="contact-toggle-btn" id="toggleBtn" title="Piilota/Näytä">
+            <span class="toggle-arrow">◄</span>
+        </div>
+        
+        <div class="contact-buttons-container" id="buttonsContainer">
+            <div class="contact-label">Shares</div>
+            
+            <a href="mailto:topejar@gmail.com" class="contact-btn" title="Lähetä sähköpostia">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </a>
+            
+            <a href="https://wa.me/358400580172" target="_blank" class="contact-btn" title="WhatsApp">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+            </a>
+            
+            <a href="tel:+358400580172" class="contact-btn" title="Soita meille">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+            </a>
+            
+            <a href="https://m.me/teuvojarvenpaa" target="_blank" class="contact-btn" title="Facebook Messenger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.373 0 0 4.975 0 11.111c0 3.497 1.745 6.616 4.472 8.652V24l4.086-2.242c1.09.301 2.246.464 3.442.464 6.627 0 12-4.974 12-11.111C24 4.975 18.627 0 12 0zm1.191 14.963l-3.055-3.26-5.963 3.26L10.732 8l3.131 3.259L19.752 8l-6.561 6.963z"/>
+                </svg>
+            </a>
+            
+            <button class="contact-btn contact-btn-share" title="Jaa sivusto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                    <polyline points="16 6 12 2 8 6"></polyline>
+                    <line x1="12" y1="2" x2="12" y2="15"></line>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

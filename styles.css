@@ -54,6 +54,55 @@ body {
     gap: 2rem;
 }
 
+/* Dropdown in navbar */
+.nav-item.dropdown {
+    position: relative;
+}
+
+.nav-link.dropdown-toggle::after {
+    content: '▾';
+    margin-left: 6px;
+    font-size: 0.8em;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    padding: 8px 0;
+    min-width: 220px;
+    z-index: 1100;
+}
+
+.dropdown-menu li { list-style: none; }
+.dropdown-menu a {
+    display: block;
+    padding: 10px 16px;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.dropdown-menu a:hover { background: #f5f7fa; color: #2C5F8D; }
+
+.nav-item.dropdown:hover > .dropdown-menu,
+.nav-item.dropdown.open > .dropdown-menu { display: block; }
+
+/* Mobile dropdown behavior */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    background: transparent;
+    padding: 0;
+    min-width: 0;
+  }
+  .dropdown-menu a { padding: 10px 0 10px 16px; }
+}
+
 .nav-link {
     text-decoration: none;
     color: #333;
@@ -441,6 +490,7 @@ body {
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    position: relative; /* allow full-card clickable overlay */
 }
 
 .service-card:hover {
@@ -469,6 +519,14 @@ body {
 .service-card p {
     color: #666;
     line-height: 1.6;
+}
+
+/* Full-card link overlay */
+.service-card a.card-link {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    text-indent: -9999px;
 }
 
 /* Contact Section */

@@ -27,8 +27,16 @@
                 <li class="nav-item">
                     <a href="#about" class="nav-link">Meistä</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#services" class="nav-link">Palvelut</a>
+                <li class="nav-item dropdown">
+                    <a href="services.html" class="nav-link dropdown-toggle">Palvelut</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="service-julkisivutyot.html">Julkisivutyöt</a></li>
+                        <li><a href="service-maalaustyot.html">Maalaustyöt</a></li>
+                        <li><a href="service-rappaustyot.html">Rappaustyöt</a></li>
+                        <li><a href="service-parvekekorjaukset.html">Parvekekorjaukset</a></li>
+                        <li><a href="service-tasoitetyot.html">Tasoitetyöt</a></li>
+                        <li><a href="service-huoneistoremontit.html">Huoneistoremontit</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#contact" class="nav-link">Yhteystiedot</a>
@@ -50,7 +58,7 @@
             <button class="cta-button">Pyydä ilmainen tarjous</button>
         </div>
         <div class="hero-image">
-            <img src="assets/images/house-painting.jpg" alt="Ammattitason ulkomaalaus" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+            <img src="assets/images/house-painting.jpg" alt="Ammattitason ulkomaalaus" style="width: 90%; height: auto; object-fit: cover; border-radius: 15px;">
         </div>
     </section>
 
@@ -233,36 +241,42 @@
                     <div class="service-icon">🎨</div>
                     <h3>Maalaustyöt</h3>
                     <p>Sisä- ja ulkomaalaukset sekä kattojen maalaukset. Ruiskumaalaukset ja perinteiset maalausmenetelmät ammattitaidolla.</p>
+                    <a class="card-link" href="service-maalaustyot.html" aria-label="Lue lisää: Maalaustyöt"></a>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">🏢</div>
                     <h3>Julkisivutyöt</h3>
                     <p>Julkisivusaneeraukset ja -korjaukset taloyhtiöille, liike- ja asuinkiinteistöihin. Kattavat julkisivuratkaisut.</p>
+                    <a class="card-link" href="service-julkisivutyot.html" aria-label="Lue lisää: Julkisivutyöt"></a>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">🧱</div>
                     <h3>Rappaustyöt</h3>
                     <p>Rappaukset ja pinnoitukset sekä tasoitetyöt sisällä ja ulkona. Levy-, betoni- ja harkkopintojen tasoitukset.</p>
+                    <a class="card-link" href="service-rappaustyot.html" aria-label="Lue lisää: Rappaustyöt"></a>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">�️</div>
                     <h3>Parvekekorjaukset</h3>
                     <p>Parvekkeiden pintakorjaukset, hiekkapuhallus ja maalaus taloyhtiöille. Ammattitason saneerauspalvelut.</p>
+                    <a class="card-link" href="service-parvekekorjaukset.html" aria-label="Lue lisää: Parvekekorjaukset"></a>
                 </div>
 
                 <div class="service-card">
                     <div class="service-icon">🔧</div>
                     <h3>Tasoitetyöt</h3>
                     <p>Levy-, betoni- ja harkkopintojen tasoitukset – pääosin koneellisesti maalivalmiiksi. Laadukas lopputulos.</p>
+                    <a class="card-link" href="service-tasoitetyot.html" aria-label="Lue lisää: Tasoitetyöt"></a>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">�</div>
                     <h3>Huoneistoremontit</h3>
                     <p>Kattavat huoneistoremontit: maalaus, rappaus ja viimeistelytyöt. Kokonaisvaltaiset saneerausratkaisut.</p>
+                    <a class="card-link" href="service-huoneistoremontit.html" aria-label="Lue lisää: Huoneistoremontit"></a>
                 </div>
             </div>
         </div>
@@ -362,7 +376,7 @@
     <!-- Floating Contact Buttons -->
     <div class="floating-contact-buttons" id="floatingButtons">
         <div class="contact-toggle-btn" id="toggleBtn" title="Piilota/Näytä">
-            <span class="toggle-arrow">◄◄</span>
+            <span class="toggle-arrow">◄</span>
         </div>
         
         <div class="contact-buttons-container" id="buttonsContainer">
