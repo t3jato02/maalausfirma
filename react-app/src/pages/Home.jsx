@@ -1,9 +1,26 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import CountUp from '../components/CountUp'
 import { Link } from 'react-router-dom'
 
 export default function Home(){
   const BASE = import.meta.env.BASE_URL
   const [filter, setFilter] = useState('all')
+
+  useEffect(() => {
+    // Prefill contact form message if a draft exists (from Urakka-arvio page)
+    try {
+      const draft = sessionStorage.getItem('estimateDraft')
+      if (draft) {
+        const ta = document.getElementById('message')
+        if (ta) {
+          const existing = ta.value || ''
+          ta.value = existing ? existing + "\n\n" + draft : draft
+          ta.focus()
+        }
+        sessionStorage.removeItem('estimateDraft')
+      }
+    } catch {}
+  }, [])
 
   const galleryItems = useMemo(() => ([
     { cat:'painting', title:'Puutalon maalaus', desc:'Ulkomaalaus ja kunnostustyöt', img:`${BASE}assets/images/gallery/puutalon-maalaus-800x700-1920w.jpg`, alt:'Puutalon maalaus' },
@@ -74,9 +91,9 @@ export default function Home(){
               <p>Teuvo Järvenpää Oy on Oulussa ja Pohjois-Pohjanmaalla toimiva julkisivutöiden, maalausten ja pinnoitusten asiantuntija. Perustettu vuonna 1984, olemme palvelleet alueemme asukkaita ja yrityksiä jo yli 40 vuoden ajan.</p>
               <p>Yhdistämme perinteisen käsityötaidon moderneihin materiaaleihin ja menetelmiin. Kokenut tiimimme on sitoutunut tuottamaan erinomaisia tuloksia, jotka kestävät Suomen vaativat sääolosuhteet.</p>
               <div className="stats">
-                <div className="stat"><h3>500+</h3><p>Valmiit projektit</p></div>
-                <div className="stat"><h3>40+</h3><p>Vuosien kokemus</p></div>
-                <div className="stat"><h3>100%</h3><p>Asiakastyytyväisyys</p></div>
+                <div className="stat"><h3><CountUp end={500} suffix="+" /></h3><p>Valmiit projektit</p></div>
+                <div className="stat"><h3><CountUp end={40} suffix="+" /></h3><p>Vuosien kokemus</p></div>
+                <div className="stat"><h3><CountUp end={100} suffix="%" /></h3><p>Asiakastyytyväisyys</p></div>
               </div>
             </div>
             <div className="about-image">
@@ -123,6 +140,12 @@ export default function Home(){
               <Link className="card-link" to="/services/parvekeremontit" aria-label="Lue lisää: Parvekeremontit" />
             </div>
             <div className="service-card">
+              <div className="service-icon">🪜</div>
+              <h3>Kattoturvatuotteet</h3>
+              <p>Kattotikkaat, kulkusillat, lumiesteet ja muut turvatuotteet määräysten mukaisesti asennettuna.</p>
+              <Link className="card-link" to="/services/kattoturvatuotteet" aria-label="Lue lisää: Kattoturvatuotteet" />
+            </div>
+            <div className="service-card">
               <div className="service-icon">🔧</div>
               <h3>Tasoitetyöt</h3>
               <p>Levy-, betoni- ja harkkopintojen tasoitukset – pääasiassa koneellisesti maalivalmiiksi.</p>
@@ -156,6 +179,7 @@ export default function Home(){
                   <option value="skim-coating">Tasoitus</option>
                   <option value="balcony">Parvekekorjaukset</option>
                   <option value="balcony-renovation">Parvekeremontit</option>
+                  <option value="roof-safety">Kattoturvatuotteet</option>
                   <option value="plastering">Rappaus / Pinnoitus</option>
                   <option value="renovation">Huoneistoremontit</option>
                   <option value="other">Muu</option>

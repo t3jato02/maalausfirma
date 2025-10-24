@@ -47,6 +47,12 @@ export default function Services(){
               <Link className="card-link" to="/services/parvekeremontit" aria-label="Lue lisää: Parvekeremontit" />
             </div>
             <div className="service-card">
+              <div className="service-icon">🪜</div>
+              <h3>Kattoturvatuotteet</h3>
+              <p>Kattotikkaat, kulkusillat, lumiesteet ja muut turvatuotteet määräysten mukaisesti asennettuna.</p>
+              <Link className="card-link" to="/services/kattoturvatuotteet" aria-label="Lue lisää: Kattoturvatuotteet" />
+            </div>
+            <div className="service-card">
               <div className="service-icon">🔧</div>
               <h3>Tasoitetyöt</h3>
               <p>Levy-, betoni- ja harkkopintojen tasoitukset – pääasiassa koneellisesti maalivalmiiksi.</p>

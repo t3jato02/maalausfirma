@@ -21,7 +21,7 @@ export default function FloatingContact(){
   return (
     <div className={`floating-contact-buttons ${collapsed ? 'collapsed' : ''}`} id="floatingButtons" ref={containerRef}>
       <div className="contact-toggle-btn" id="toggleBtn" title="Piilota/Näytä" onClick={() => setCollapsed(v => !v)}>
-        <span className="toggle-arrow">◄</span>
+        <span className="toggle-arrow">{isMobile ? (collapsed ? '▲' : '▼') : '◄'}</span>
       </div>
 
       <div className={`contact-buttons-container ${collapsed ? 'collapsed' : ''}`} id="buttonsContainer">

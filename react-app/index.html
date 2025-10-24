@@ -14,7 +14,8 @@
   </head>
   <body>
     <div id="root"></div>
-    <script src="chatbot-config.js"></script>
+  <!-- Exclude from Vite bundling; served from public/ as-is -->
+  <script src="/chatbot-config.js" data-no-bundle></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

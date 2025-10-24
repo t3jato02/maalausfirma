@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { findBestAnswer } from '../data/faqs'
+import { estimatePricing, PRICE_RANGES, estimateRoomAllSurfaces } from '../data/pricing'
 
 const PHONE = '+358400580172'
 const EMAIL = 'teuvo.jarvenpaa@luukku.com'
@@ -9,7 +10,7 @@ export default function Chatbot(){
   const [mode, setMode] = useState('chat') // chat | contact
   const [messages, setMessages] = useState(() => ([
     { role: 'bot', text: 'Hei! Olen Teuvo Järvenpää Oy:n avustaja. Vastaan yleisiin kysymyksiin ja voin myös välittää viestisi yritykselle.' },
-    { role: 'bot', text: 'Kokeile: "Teettekö peltikattojen maalauksia?" tai avaa yhteydenotto lomake.' }
+    { role: 'bot', text: 'Voin antaa myös ERITTÄIN karkean hinta-arvion. Kokeile: "Mikä on maalarin tuntiveloitus?" tai "Paljonko maksaa 50 m² sisäseinien maalaus?"' }
   ]))
   const [input, setInput] = useState('')
   const listRef = useRef(null)
@@ -32,6 +33,29 @@ export default function Chatbot(){
     } else {
       sendBot('En ole varma vastauksesta. Voit kysyä toisin tai siirtyä lähettämään viestin meille lomakkeella (napauta "Ota yhteyttä").')
     }
+  }
+
+  // Render bot text with simple formatting: clickable links and line breaks
+  const renderBotText = (text) => {
+    const urlRe = /(https?:\/\/[^\s)]+)|(www\.[^\s)]+)/gi
+    const parts = String(text||'').split('\n')
+    return (
+      <>
+        {parts.map((line, idx) => (
+          <div key={idx} className="cb-line">
+            {line.split(urlRe).map((chunk, i) => {
+              if (!chunk) return null
+              const isUrl = /^(https?:\/\/|www\.)/i.test(chunk)
+              if (isUrl) {
+                const href = chunk.startsWith('http') ? chunk : `https://${chunk}`
+                return <a key={i} href={href} target="_blank" rel="noreferrer">{chunk}</a>
+              }
+              return <span key={i}>{chunk}</span>
+            })}
+          </div>
+        ))}
+      </>
+    )
   }
 
   const [contact, setContact] = useState({ name: '', email: '', phone: '', message: '' })
@@ -63,8 +87,61 @@ export default function Chatbot(){
     sendBot('Avasin sähköpostin luonnoksen. Jos se ei auennut, voit myös soittaa: 0400 580 172.')
   }
 
+  // Quick estimate mini-form state
+  const [showEstimator, setShowEstimator] = useState(false)
+  const [estCat, setEstCat] = useState('sisaseinat')
+  const [estQty, setEstQty] = useState('')
+  const [estRoomHeight, setEstRoomHeight] = useState('2.6')
+  const [estIncludeFloor, setEstIncludeFloor] = useState(true)
+  const estUnit = PRICE_RANGES[estCat]?.unit || 'm²'
+  const estLabel = PRICE_RANGES[estCat]?.label || 'Kohde'
+
+  const EST_PHRASES = {
+    sisaseinat: 'sisäseinien maalaus',
+    sisakatot: 'sisäkaton maalaus',
+    ruiskukatto: 'ruiskukaton maalaus',
+    tapetointi: 'tapetointi',
+    peltikatto: 'peltikaton maalaus',
+    julkisivu_puu: 'puujulkisivun maalaus',
+    julkisivu_rappaus: 'rapatun julkisivun maalaus',
+    betonilattia: 'betonilattian maalaus/pinnoitus',
+    kipsi_maalivalmis: 'kipsilevystä maalivalmiiksi (tasoitus + maalaus)',
+    kipsi_ruiskukatto: 'kipsilevystä ruiskukattopintaan',
+    ovi: 'ovien maalaus',
+    ikkuna: 'ikkunoiden maalaus',
+    huone_all: 'huoneen kaikkien pintojen maalaus'
+  }
+
+  const onEstimate = (e) => {
+    e?.preventDefault?.()
+    const qty = parseFloat(String(estQty).replace(',', '.'))
+    if (estCat === 'huone_all') {
+      if (!qty || qty <= 0) { sendBot('Syötä huoneen pohjan pinta-ala (m²), esim. 12.'); return }
+      const h = parseFloat(String(estRoomHeight).replace(',', '.')) || 2.6
+      sendUser(`Pyydä arvio: Huoneen kaikki pinnat – ${qty} m², seinäkorkeus ${h} m${estIncludeFloor ? ', lattia mukana' : ''}`)
+      const out = estimateRoomAllSurfaces(qty, h, estIncludeFloor)
+      if (out) sendBot(out)
+      else sendBot('En saanut huonearviota laskettua. Kokeile eri arvoilla tai pyydä tarjous.')
+    } else {
+      if (!qty || qty <= 0) {
+        sendBot('Syötä kelvollinen määrä arvioa varten (esim. 50 m² tai 3 kpl).')
+        return
+      }
+      const phrase = EST_PHRASES[estCat] || estLabel
+      const text = `hinta ${phrase} ${qty} ${estUnit}`
+      // Echo user intent and respond with estimate
+      sendUser(`Pyydä arvio: ${estLabel} – ${qty} ${estUnit}`)
+      const ans = estimatePricing(text)
+      if (ans) sendBot(ans)
+      else sendBot('En saanut muodostettua arviota. Kokeile tarkentaa kohde ja määrä, tai pyydä tarjous.')
+    }
+    setShowEstimator(false)
+    setEstQty('')
+  }
+
   const quickActions = (
     <div className="cb-quick">
+      <button className="cb-btn ghost" onClick={() => setShowEstimator(s => !s)}>Pyydä arvio</button>
       <button className="cb-btn ghost" onClick={() => setMode('contact')}>Ota yhteyttä</button>
       <a className="cb-btn ghost" href={`https://wa.me/${PHONE.replace(/[^0-9]/g,'')}?text=${encodeURIComponent('Hei! Tarvitsen lisätietoja / tarjouksen.')}`} target="_blank" rel="noreferrer">WhatsApp</a>
       <a className="cb-btn ghost" href={`sms:${PHONE}?body=${encodeURIComponent('Hei! Tarvitsen lisätietoja / tarjouksen.')}`}>SMS</a>
@@ -94,10 +171,51 @@ export default function Chatbot(){
             <>
               <div className="cb-messages" ref={listRef}>
                 {messages.map((m, i) => (
-                  <div key={i} className={`cb-msg ${m.role}`}>{m.text}</div>
+                  <div key={i} className={`cb-msg ${m.role}`}>
+                    {m.role === 'bot' ? renderBotText(m.text) : m.text}
+                  </div>
                 ))}
               </div>
               {quickActions}
+              {showEstimator && (
+                <form className="cb-form" onSubmit={onEstimate}>
+                  <label>
+                    Kohde
+                    <select value={estCat} onChange={e => setEstCat(e.target.value)}>
+                      <option value="huone_all">Huoneen kaikki pinnat (pohjan m²)</option>
+                      {Object.entries(PRICE_RANGES).map(([id, cfg]) => (
+                        <option key={id} value={id}>{cfg.label} ({cfg.unit})</option>
+                      ))}
+                    </select>
+                  </label>
+                  {estCat === 'huone_all' ? (
+                    <>
+                      <label>
+                        Huoneen pohjan pinta-ala (m²)
+                        <input type="number" min="0" step="0.1" value={estQty} onChange={e => setEstQty(e.target.value)} placeholder="Esim. 12" />
+                      </label>
+                      <label>
+                        Seinäkorkeus (m)
+                        <input type="number" min="2" step="0.1" value={estRoomHeight} onChange={e => setEstRoomHeight(e.target.value)} placeholder="Esim. 2.6" />
+                      </label>
+                      <label style={{display:'flex',alignItems:'center',gap:8}}>
+                        <input type="checkbox" checked={estIncludeFloor} onChange={e => setEstIncludeFloor(e.target.checked)} />
+                        Sisällytä lattia (betonilattian maalaus/pinnoitus)
+                      </label>
+                    </>
+                  ) : (
+                    <label>
+                      Määrä ({estUnit})
+                      <input type="number" min="0" step="0.1" value={estQty} onChange={e => setEstQty(e.target.value)} placeholder={estUnit === 'kpl' ? 'Esim. 3' : 'Esim. 50'} />
+                    </label>
+                  )}
+                  <div className="cb-form-actions">
+                    <button type="button" className="cb-btn ghost" onClick={() => setShowEstimator(false)}>Peruuta</button>
+                    <button type="submit" className="cb-btn">Laske</button>
+                  </div>
+                  <div className="cb-muted">Arvio on erittäin karkea. Materiaalit, suojaukset/telineet ja esikäsittelyt erikseen.</div>
+                </form>
+              )}
               <div className="cb-input">
                 <input
                   value={input}

@@ -57,6 +57,9 @@ body {
   font-size: 1.8rem;
   font-weight: 700;
 }
+/* Make brand name clickable without changing its look */
+.nav-logo .brand-link { text-decoration: none; color: inherit; display: inline-block; }
+.nav-logo .brand-link:hover { color: #C74544; }
 
 .nav-menu {
   display: flex;
@@ -126,8 +129,8 @@ body {
 
 .nav-link {
   text-decoration: none;
-  color: #333;
-  font-weight: 500;
+  color: #2C5F8D; /* unify navbar links to brand color */
+  font-weight: 700; /* tee kaikki linkit lihavoiduksi kuten Etusivu */
   transition: color 0.3s ease;
   position: relative;
 }
@@ -398,6 +401,17 @@ body {
 .gallery-item:hover {
   transform: translateY(-10px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Offset left floating contact toggle so hero text isn't covered (desktop/tablet) */
+@media (min-width: 768px) {
+  /* Extra safe offset so vasen yhteydenottopalkki ei peitä tekstiä */
+  .hero-content { padding-left: 96px; }
+}
+
+@media (min-width: 1024px) {
+  /* Hiukan lisää väljyyttä isoilla näytöillä */
+  .hero-content { padding-left: 120px; }
 }
 
 .gallery-image {
@@ -896,6 +910,24 @@ html {
   align-items: flex-end;
 }
 
+/* Hard guarantee: on narrow viewports, dock the floating contact bar to bottom */
+@media (max-width: 768px) {
+  .floating-contact-buttons {
+    left: auto !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    top: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-end !important;
+    position: fixed !important;
+    z-index: 998 !important;
+  }
+  .floating-contact-buttons .contact-buttons-container { flex-direction: row !important; }
+}
+
 .floating-contact-buttons.hidden-scroll {
   opacity: 0;
   pointer-events: none;
@@ -1013,8 +1045,8 @@ html {
   z-index: 1000;
 }
 
-/* When collapsed, move toggle button to left edge of screen */
-.contact-buttons-container.collapsed ~ .contact-toggle-btn {
+/* When collapsed, move toggle button to left edge of screen (desktop/tablet only) */
+.floating-contact-buttons:not(.mobile) .contact-buttons-container.collapsed ~ .contact-toggle-btn {
   right: auto;
   left: 0;
   border-radius: 0 10px 10px 0;
@@ -1022,7 +1054,8 @@ html {
 }
 
 /* Prefer parent-based collapsed selector so toggle can be positioned even when it comes before the container in the DOM */
-.floating-contact-buttons.collapsed .contact-toggle-btn {
+/* Prefer parent-based collapsed selector; desktop/tablet only */
+.floating-contact-buttons:not(.mobile).collapsed .contact-toggle-btn {
   right: auto;
   left: 0; /* pin to the absolute left edge */
   transform: translateY(-50%); /* keep vertical centering */
@@ -1043,11 +1076,16 @@ html {
   margin-top: 0;
   z-index: 1000 !important;
   transition: all 0.3s ease;
+  display: flex !important; /* ensure visible on mobile */
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
 }
 
 /* Kun valikko on avoinna, siirrä nappi yläpuolelle */
 .floating-contact-buttons.mobile:not(.collapsed) .contact-toggle-btn {
-  bottom: 60px !important; /* height of contact buttons + margin */
+  /* Place the arrow handle on top of the bottom dock bar */
+  bottom: calc(50px + 14px) !important; /* button size (50) + padding/gap (~14) */
   top: auto !important;
   left: 50% !important;
   position: fixed !important;
@@ -1094,16 +1132,13 @@ html {
   transition: all 0.3s ease;
 }
 
-.floating-contact-buttons.mobile .toggle-arrow {
-  transform: rotate(0deg);
-}
+/* Desktop arrow flips when collapsed; keep mobile static (we swap glyphs instead) */
+.floating-contact-buttons:not(.mobile) .contact-toggle-btn .toggle-arrow { transform: rotate(0deg); }
+.floating-contact-buttons:not(.mobile).collapsed .toggle-arrow { transform: rotate(180deg); }
 
-.contact-buttons-container.collapsed ~ .contact-toggle-btn .toggle-arrow {
-  transform: rotate(180deg);
-}
-
-.floating-contact-buttons.mobile .contact-buttons-container.collapsed ~ .contact-toggle-btn .toggle-arrow {
-  transform: rotate(180deg);
+/* Parent-state arrow rotation to support any DOM order */
+.floating-contact-buttons.collapsed .toggle-arrow {
+  transform: rotate(180deg) !important;
 }
 
 /* Tooltip on hover */
