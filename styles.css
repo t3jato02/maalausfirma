@@ -1,0 +1,1048 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+    background: #F8F8F8;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-logo h2 {
+    font-family: 'Playfair Display', serif;
+    color: #2C5F8D;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #C74544;
+}
+
+/* Brushstroke-style underline effect */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        #C74544 2%, 
+        #C74544 98%, 
+        transparent 100%);
+    /* Create irregular, brush-like edges */
+    clip-path: polygon(
+        0% 30%, 2% 10%, 5% 40%, 8% 20%, 12% 50%, 15% 15%, 
+        18% 45%, 22% 25%, 25% 55%, 28% 20%, 32% 50%, 35% 30%, 
+        38% 60%, 42% 25%, 45% 55%, 48% 35%, 52% 60%, 55% 30%, 
+        58% 65%, 62% 35%, 65% 60%, 68% 25%, 72% 55%, 75% 30%, 
+        78% 60%, 82% 20%, 85% 50%, 88% 30%, 92% 55%, 95% 25%, 
+        98% 50%, 100% 35%, 100% 75%, 98% 85%, 95% 70%, 92% 90%, 
+        88% 75%, 85% 85%, 82% 70%, 78% 90%, 75% 75%, 72% 85%, 
+        68% 70%, 65% 90%, 62% 75%, 58% 85%, 55% 70%, 52% 85%, 
+        48% 75%, 45% 85%, 42% 70%, 38% 85%, 35% 75%, 32% 85%, 
+        28% 70%, 25% 85%, 22% 75%, 18% 85%, 15% 70%, 12% 90%, 
+        8% 75%, 5% 85%, 2% 70%, 0% 80%
+    );
+    opacity: 0.9;
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: left center;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    animation: brushPaint 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Brushstroke paint animation */
+@keyframes brushPaint {
+    0% {
+        width: 0%;
+        opacity: 0.6;
+        transform: scaleY(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scaleY(1.1);
+    }
+    100% {
+        width: 100%;
+        opacity: 0.9;
+        transform: scaleY(1);
+    }
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 100px 20px 50px;
+    background: linear-gradient(135deg, #2C5F8D 0%, #1a4a6e 100%);
+    color: white;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-button {
+    background: #F4C430;
+    color: #333;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(244, 196, 48, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        transparent 100%);
+    transition: left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.cta-button:hover {
+    background: #2C5F8D;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(44, 95, 141, 0.4);
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2rem;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder-image {
+    width: 400px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    font-size: 1.1rem;
+    backdrop-filter: blur(10px);
+}
+
+/* Section Titles */
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #2C5F8D;
+}
+
+.section-description {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Gallery Section */
+.gallery {
+    padding: 100px 0;
+    background: #F8F8F8;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: white;
+    border: 2px solid #2C5F8D;
+    color: #2C5F8D;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #2C5F8D;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(44, 95, 141, 0.3);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.gallery-item {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.gallery-item::after {
+    content: '🔍 Klikkaa nähdäksesi suurempana';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-image {
+    height: 250px;
+    background: linear-gradient(45deg, #2C5F8D, #1a4a6e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    overflow: hidden;
+}
+
+.gallery-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-image img {
+    transform: scale(1.1);
+}
+
+.gallery-info {
+    padding: 1.5rem;
+}
+
+.gallery-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #2C5F8D;
+}
+
+.gallery-info p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* About Section */
+.about {
+    padding: 100px 0;
+    background: white;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-text {
+    padding-right: 2rem;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+.stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat h3 {
+    font-size: 2.5rem;
+    color: #F4C430;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat p {
+    color: #666;
+    font-weight: 500;
+}
+
+.about-image .placeholder-image,
+.about-image img {
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(135deg, #2C5F8D 0%, #1a4a6e 100%);
+    color: white;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* Services Section */
+.services {
+    padding: 100px 0;
+    background: white;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.service-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    filter: none;
+}
+
+.service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #2C5F8D;
+}
+
+.service-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Contact Section */
+.contact {
+    padding: 100px 0;
+    background: white;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #2C5F8D;
+}
+
+.contact-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2C5F8D;
+}
+
+.submit-btn {
+    background: #2C5F8D;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #C74544;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(199, 69, 68, 0.4);
+}
+
+/* Footer */
+.footer {
+    background: #2C5F8D;
+    color: white;
+    padding: 50px 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.footer-section p {
+    color: #bdc3c7;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-section ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        #C74544 5%, 
+        #C74544 95%, 
+        transparent 100%);
+    clip-path: polygon(
+        0% 20%, 3% 5%, 7% 30%, 12% 10%, 17% 40%, 23% 15%, 
+        28% 45%, 34% 20%, 40% 50%, 46% 25%, 52% 55%, 58% 30%, 
+        64% 60%, 70% 25%, 76% 50%, 82% 20%, 88% 45%, 94% 25%, 
+        100% 40%, 100% 70%, 94% 80%, 88% 65%, 82% 85%, 76% 70%, 
+        70% 80%, 64% 70%, 58% 85%, 52% 75%, 46% 80%, 40% 70%, 
+        34% 85%, 28% 75%, 23% 80%, 17% 70%, 12% 85%, 7% 75%, 
+        3% 80%, 0% 65%
+    );
+    opacity: 0.9;
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.footer-section ul li a:hover {
+    color: #F4C430;
+}
+
+.footer-section ul li a:hover::after {
+    width: 100%;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    color: #bdc3c7;
+    text-decoration: none;
+    padding: 10px;
+    border: 1px solid #34495e;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #FAEAB1;
+    border-color: #FAEAB1;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #34495e;
+    color: #bdc3c7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: white;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        padding: 2rem 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu li {
+        margin: 1rem 0;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 120px 20px 50px;
+    }
+
+    .hero-image {
+        margin-left: 0;
+        margin-top: 2rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .placeholder-image {
+        width: 300px;
+        height: 200px;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .stats {
+        justify-content: center;
+    }
+
+    .filter-buttons {
+        justify-content: center;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .placeholder-image {
+        width: 250px;
+        height: 180px;
+    }
+
+    .stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Floating Contact Buttons */
+.floating-contact-buttons {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 998;
+    transition: all 0.3s ease;
+}
+
+/* When buttons are collapsed, move entire container to left edge */
+.floating-contact-buttons .contact-buttons-container.collapsed {
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Move the whole floating container when collapsed */
+.floating-contact-buttons:has(.contact-buttons-container.collapsed) {
+    left: 0;
+}
+
+.floating-contact-buttons.mobile {
+    left: 50%;
+    right: auto;
+    bottom: 20px;
+    top: auto;
+    transform: translateX(-50%);
+}
+
+.floating-contact-buttons.hidden-scroll {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.contact-buttons-container {
+    background: transparent; /* fully transparent so it won't cover content */
+    backdrop-filter: none;    /* remove blur */
+    border-radius: 0;         /* container outline not needed when transparent */
+    padding: 6px;             /* minimal padding around buttons */
+    box-shadow: none;         /* no shadow to avoid visual block */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.floating-contact-buttons.mobile .contact-buttons-container {
+    border-radius: 0;         /* no bar background on mobile either */
+    padding: 6px 8px;
+    flex-direction: row;
+}
+
+.contact-buttons-container.collapsed {
+    transform: translateX(-100%);
+}
+
+.floating-contact-buttons.mobile .contact-buttons-container.collapsed {
+    transform: translateY(150%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.contact-label {
+    display: none; /* hide label to avoid covering content */
+}
+
+.floating-contact-buttons.mobile .contact-label {
+    writing-mode: horizontal-tb;
+    margin-bottom: 0;
+    margin-right: 10px;
+}
+
+.contact-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #3b5998;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    pointer-events: auto; /* make buttons clickable even though container ignores events */
+}
+
+.contact-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.contact-btn:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.contact-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.contact-btn svg {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-btn:nth-child(2) { background: #3b5998; } /* Email - Blue */
+.contact-btn:nth-child(3) { background: #25D366; } /* WhatsApp - Green */
+.contact-btn:nth-child(4) { background: #4267B2; } /* Phone - Blue */
+.contact-btn:nth-child(5) { background: #0084ff; } /* Messenger - Blue */
+.contact-btn-share { background: #F4C430; } /* Share - Yellow */
+
+/* Toggle Button */
+.contact-toggle-btn {
+    position: absolute;
+    right: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 60px;
+    background: #C74544;
+    backdrop-filter: blur(10px);
+    border-radius: 0 10px 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+/* When collapsed, move toggle button to left edge of screen */
+.contact-buttons-container.collapsed ~ .contact-toggle-btn {
+    right: auto;
+    left: 0;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Prefer parent-based collapsed selector so toggle can be positioned even when it comes before the container in the DOM */
+.floating-contact-buttons.collapsed .contact-toggle-btn {
+    right: auto;
+    left: 0; /* pin to the absolute left edge */
+    transform: translateY(-50%); /* keep vertical centering */
+    border-radius: 0 10px 10px 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.floating-contact-buttons.mobile .contact-toggle-btn {
+    right: auto !important;
+    left: 50% !important;
+    top: auto !important;
+    bottom: auto;
+    transform: translateX(-50%) translateY(-100%) !important;
+    width: 60px;
+    height: 30px;
+    border-radius: 10px 10px 0 0;
+    position: relative;
+    margin-top: -30px;
+}
+
+/* Mobile collapsed state - dock toggle to absolute bottom center */
+.floating-contact-buttons.mobile .contact-buttons-container.collapsed ~ .contact-toggle-btn {
+    left: 50%;
+    top: auto;
+    bottom: 0;
+    transform: translateX(-50%);
+    border-radius: 10px 10px 0 0;
+}
+
+/* Parent-based mobile collapsed rule (reliable regardless of DOM order) */
+.floating-contact-buttons.mobile.collapsed .contact-toggle-btn {
+    left: 50% !important;
+    top: auto !important;
+    bottom: 0 !important;
+    transform: translateX(-50%) !important;
+    border-radius: 10px 10px 0 0;
+    position: fixed !important;
+    margin-top: 0;
+}
+
+.contact-toggle-btn:hover {
+    background: #a33735;
+}
+
+.contact-toggle-btn:hover .toggle-arrow {
+    color: white;
+}
+
+.toggle-arrow {
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.floating-contact-buttons.mobile .toggle-arrow {
+    transform: rotate(0deg);
+}
+
+.contact-buttons-container.collapsed ~ .contact-toggle-btn .toggle-arrow {
+    transform: rotate(180deg);
+}
+
+.floating-contact-buttons.mobile .contact-buttons-container.collapsed ~ .contact-toggle-btn .toggle-arrow {
+    transform: rotate(180deg);
+}
+
+/* Tooltip on hover */
+.contact-btn::after {
+    content: attr(title);
+    position: absolute;
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.contact-btn:hover::after {
+    opacity: 1;
+}
+
+.floating-contact-buttons.mobile .contact-btn::after {
+    left: 50%;
+    top: auto;
+    bottom: calc(100% + 10px);
+    transform: translateX(-50%);
+}
+
+/* Animation classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Modal animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Gallery modal styles */
+.gallery-modal {
+    transition: opacity 0.3s ease;
+}
+
+.gallery-modal img {
+    cursor: zoom-in;
+}
+
+/* Loading animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.gallery-item:hover .gallery-image {
+    animation: pulse 2s infinite;
+}
