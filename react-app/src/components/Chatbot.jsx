@@ -14,6 +14,19 @@ export default function Chatbot(){
   ]))
   const [input, setInput] = useState('')
   const listRef = useRef(null)
+  const draggingRef = useRef(false)
+  const startRef = useRef({ x: 0, y: 0 })
+  const posRef = useRef({ side: 'right', y: null })
+  const [isMobile, setIsMobile] = useState(() => (typeof window !== 'undefined' ? window.innerWidth <= 768 : false))
+  const [fabPos, setFabPos] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('cbFabPos')) || { side: 'right', y: null } } catch { return { side: 'right', y: null } }
+  })
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 768)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
   useEffect(() => { if (open && listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight }, [messages, open])
 
@@ -148,10 +161,87 @@ export default function Chatbot(){
     </div>
   )
 
+  // Draggable FAB for mobile: snap to left/right edges and keep within safe bounds
+  const onFabPointerDown = (e) => {
+    if (!isMobile || open) return
+    try { e.preventDefault() } catch {}
+    draggingRef.current = true
+    const pt = 'touches' in e ? e.touches[0] : e
+    startRef.current = { x: pt.clientX, y: pt.clientY }
+    posRef.current = { ...fabPos }
+    const move = (ev) => {
+      if (!draggingRef.current) return
+      const mv = 'touches' in ev ? ev.touches[0] : ev
+      const dx = mv.clientX - startRef.current.x
+      const dy = mv.clientY - startRef.current.y
+      // Preview position (not persisted yet)
+      const y0 = posRef.current.y !== null ? posRef.current.y : null
+      const currentY = y0 !== null ? y0 + dy : null
+      const preview = { side: posRef.current.side, y: currentY }
+      setFabPos((prev) => ({ ...prev, ...preview }))
+    }
+    const up = (ev) => {
+      const upPt = 'changedTouches' in ev ? ev.changedTouches[0] : ev
+      const dx = upPt.clientX - startRef.current.x
+      const dy = upPt.clientY - startRef.current.y
+      const moved = Math.hypot(dx, dy)
+      draggingRef.current = false
+      window.removeEventListener('pointermove', move)
+      window.removeEventListener('pointerup', up)
+      window.removeEventListener('touchmove', move)
+      window.removeEventListener('touchend', up)
+
+      if (moved < 6) {
+        setOpen(true)
+        return
+      }
+
+      // Commit snap
+      const vw = window.innerWidth
+      const vh = window.innerHeight
+      const side = (startRef.current.x + dx) < vw / 2 ? 'left' : 'right'
+      const SAFE_BOTTOM = 84 // keep above contact bar
+      const TOP_PAD = 16
+      const btnSize = 56
+      let y = (posRef.current.y !== null ? posRef.current.y : (vh - SAFE_BOTTOM - btnSize)) + dy
+      y = Math.max(TOP_PAD, Math.min(vh - SAFE_BOTTOM - btnSize, y))
+      const next = { side, y }
+      setFabPos(next)
+      try { localStorage.setItem('cbFabPos', JSON.stringify(next)) } catch {}
+    }
+    window.addEventListener('pointermove', move, { passive: false })
+    window.addEventListener('pointerup', up, { passive: true })
+    window.addEventListener('touchmove', move, { passive: false })
+    window.addEventListener('touchend', up, { passive: true })
+  }
+
+  const onFabClick = () => {
+    if (draggingRef.current) return
+    setOpen(true)
+  }
+
   return (
-    <div className={`cb-root ${open ? 'open' : ''}`}>
+    <div
+      className={`cb-root ${open ? 'open' : ''}`}
+      style={isMobile
+        ? (
+            open
+              // When open on mobile, ALWAYS anchor to right side, above bottom bar
+              ? { right: 12, left: 'auto', bottom: 84 }
+              // When closed, follow draggable FAB position (left/right, stored Y)
+              : (fabPos.y === null
+                  ? (fabPos.side === 'left'
+                      ? { left: 12, right: 'auto', bottom: 84 }
+                      : { right: 12, left: 'auto', bottom: 84 })
+                  : (fabPos.side === 'left'
+                      ? { left: 12, right: 'auto', top: Math.max(16, Math.min(window.innerHeight - 84 - 56, fabPos.y)) }
+                      : { right: 12, left: 'auto', top: Math.max(16, Math.min(window.innerHeight - 84 - 56, fabPos.y)) })
+                )
+          )
+        : undefined}
+    >
       {!open && (
-        <button className="cb-fab" aria-label="Avaa chat" onClick={() => setOpen(true)}>
+        <button className="cb-fab" aria-label="Avaa chat" onClick={onFabClick} onPointerDown={onFabPointerDown} onTouchStart={onFabPointerDown}>
           💬
         </button>
       )}

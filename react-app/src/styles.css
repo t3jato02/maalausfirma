@@ -843,6 +843,7 @@ html {
   width: 56px; height: 56px; border-radius: 50%; border: none; cursor: pointer;
   background: var(--primary); color: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
   font-size: 24px; display: flex; align-items: center; justify-content: center;
+  touch-action: none; /* enable smooth dragging on mobile */
 }
 .cb-panel {
   width: min(360px, 92vw); height: 520px; background: #fff; border-radius: 16px;
@@ -870,8 +871,9 @@ html {
 .cb-form-actions { display: flex; gap: 8px; justify-content: flex-end; }
 .cb-muted { color: #6b7280; font-size: 0.85rem; margin-top: 6px; }
 
-@media (max-width: 480px) {
-  .cb-root { right: 12px; bottom: 12px; }
+@media (max-width: 768px) {
+  /* Default higher bottom so it doesn't overlap the contact bar; overridden inline when user drags */
+  .cb-root { right: 12px; bottom: 84px; }
 }
 
 /* Floating Contact Buttons */
