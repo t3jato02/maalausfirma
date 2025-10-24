@@ -764,11 +764,17 @@ html {
 }
 
 .floating-contact-buttons.mobile {
-    left: 50%;
-    right: auto;
-    bottom: 20px;
-    top: auto;
-    transform: translateX(-50%);
+    left: auto !important;
+    right: auto !important;
+    bottom: 0 !important;
+    top: auto !important;
+    transform: none !important;
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+    position: fixed !important;
+    z-index: 998;
+    align-items: flex-end;
 }
 
 .floating-contact-buttons.hidden-scroll {
@@ -909,13 +915,29 @@ html {
     right: auto !important;
     left: 50% !important;
     top: auto !important;
-    bottom: auto;
-    transform: translateX(-50%) translateY(-100%) !important;
+    bottom: 0 !important;
+    transform: translateX(-50%) !important;
     width: 60px;
     height: 30px;
     border-radius: 10px 10px 0 0;
-    position: relative;
-    margin-top: -30px;
+    position: fixed !important;
+    margin-top: 0;
+    z-index: 1000 !important;
+    transition: all 0.3s ease;
+}
+
+/* Kun valikko on avoinna, siirrä nappi yläpuolelle */
+.floating-contact-buttons.mobile:not(.collapsed) .contact-toggle-btn {
+    bottom: 60px !important; /* height of contact buttons + margin */
+    top: auto !important;
+    left: 50% !important;
+    position: fixed !important;
+    order: unset;
+    width: 60px;
+    height: 30px;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 8px; /* small margin above buttons */
+    transform: translateX(-50%) !important;
 }
 
 /* Mobile collapsed state - dock toggle to absolute bottom center */
