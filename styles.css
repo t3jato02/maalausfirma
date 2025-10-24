@@ -940,11 +940,11 @@ html {
     z-index: 1;
 }
 
-.contact-btn:nth-child(2) { background: #3b5998; } /* Email - Blue */
-.contact-btn:nth-child(3) { background: #25D366; } /* WhatsApp - Green */
-.contact-btn:nth-child(4) { background: #4267B2; } /* Phone - Blue */
-.contact-btn:nth-child(5) { background: #0084ff; } /* Messenger - Blue */
-.contact-btn-share { background: #F4C430; } /* Share - Yellow */
+.contact-btn:nth-child(2) { background: #2C5F8D; } /* Email - Brand Blue */
+.contact-btn:nth-child(3) { background: #C74544; } /* WhatsApp - Brand Red */
+.contact-btn:nth-child(4) { background: #2C5F8D; } /* Phone - Brand Blue */
+.contact-btn:nth-child(5) { background: #2C5F8D; } /* Messenger - Brand Blue */
+.contact-btn-share { background: #F4C430; } /* Share - Brand Yellow */
 
 /* Toggle Button */
 .contact-toggle-btn {
